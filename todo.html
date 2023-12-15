@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO-LIST</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background: rgb(198,24,100);
+            background: radial-gradient(circle, rgba(198,24,100,1) 30%, rgba(148,187,233,1) 100%);
+        }
+
+        header {
+            background-image: url('header_bg.jpg'); /* Replace with your actual image URL */
+            background-size: cover;
+            color: green;
+            text-align: center;
+            padding: 5em 0;
+        }
+
+        section {
+            padding: 2em;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color:rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+            backdrop-filter: blur(10px); /* Background blur effect */
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 300px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 40px;
+        }
+
+        p {
+            font-size: 1.1em;
+        }
+
+        /* Styles for the feedback form */
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 65%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .rating-input {
+            display: none;
+        }
+
+        .rating-label {
+            display: inline-block;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .rating-star {
+            color: #FFD700;
+            font-size: 24px;
+        }
+
+        .task-container {
+            width:700px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            margin-left: 25px;
+        }
+
+        .task-container.completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            margin-right: 10px;
+        }
+
+        .remove-task {
+            cursor: pointer;
+            color: #ff0000;
+        }
+
+        button{
+            background-color: #4CAF50;
+            width: 200px;
+            height: 35px;
+            color: azure;
+            border: none;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1></h1>
+    </header>
+
+    <section class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task...">&ensp;
+        <button onclick="addTask()">Add</button>
+        <div id="taskList">
+            <!-- Tasks will be added dynamically here -->
+        </div>
+    </section>
+
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskList = document.getElementById("taskList");
+
+            if (taskInput.value.trim() !== "") {
+                var div = document.createElement("div");
+                div.className = "task-container";
+                div.innerHTML = '<div class="circle"></div><span>' + taskInput.value + '</span><span class="remove-task" onclick="removeTask(this)"> &#10060;</span>';
+                div.addEventListener("click", function () {
+                    this.classList.toggle("completed");
+                });
+                taskList.appendChild(div);
+                taskInput.value = "";
+            }
+        }
+
+        function removeTask(element) {
+            var taskList = document.getElementById("taskList");
+            var div = element.parentNode;
+            taskList.removeChild(div);
+        }
+    </script>
+
+</body>
+</html>
